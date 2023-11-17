@@ -9,9 +9,11 @@ plansza = [
 tie = False
 znak = 2
 bot = False
+
 @app.route("/")
 def index():
     return render_template('index.html')
+
 @app.route("/gra/human")
 def grahuman():
     global bot
