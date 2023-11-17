@@ -20,12 +20,14 @@ def grahuman():
     empty()
     bot=False
     return render_template('gra.html',plansza=plansza,bot=bot, test=detectcrossing())
+
 @app.route("/gra/bot")
 def grabot():
     global bot
     empty()
     bot=True
     return render_template('gra.html',plansza=plansza,bot=bot, test=detectcrossing())
+    
 @app.route("/gra")
 def gra():
     return render_template('gra.html',plansza=plansza,bot=bot, test=detectcrossing())
