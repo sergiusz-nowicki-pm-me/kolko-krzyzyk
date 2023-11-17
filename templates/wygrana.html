@@ -1,0 +1,18 @@
+<html>
+    <body>
+        {% if znak==1: %}
+            <h1>Kółko wygrało</h1>
+        {%elif znak==2%}
+            <h1>Krzyżyk wygrał</h1>
+        {%elif znak ==0%}
+            <h1>Remis</h1>
+        {% endif %}
+        <form action="{{url_for('reset')}}">
+            <input input type="submit" value="Zagraj Ponownie"/>
+        </form>
+    </body>
+</html>
+
+
+
+
