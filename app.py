@@ -37,12 +37,14 @@ def reset():
     global plansza
     empty()
     return redirect(url_for('index'))
+
 def empty():
      global plansza,znak
      znak = 2
      for wiersz in range(0,3):
         for komorka in range(0,3):
             plansza[wiersz][komorka] = 0
+
 @app.route("/gra/ruch")
 def gra_ruch():
     global znak
@@ -107,6 +109,7 @@ def winningmove():
     if plansza[0][2] == plansza[1][1] == znak and plansza[2][0] == 0:
            return (2,0)
     return (-1,-1)
+
 def block():
      enemy = znak
      if enemy==2:
@@ -140,8 +143,9 @@ def block():
      if plansza[0][2] == plansza[1][1] == enemy and plansza[2][0] == 0:
            return (2,0)
      return (-1,-1)
+
 def detectcrossing():
-    #middle is always full because it is first move for bot if player didnt took it
+    # middle is always full because it is first move for bot if player didnt took it
     if plansza[2][0] == plansza[0][2] == znak:
          if plansza [0][1]==plansza[0][0]==plansza[1][0]==0:
               return(0,0)
@@ -152,9 +156,6 @@ def detectcrossing():
               return(0,2)
          if plansza [2][0]==plansza[2][1]==plansza[1][0]==0:
               return(2,0)
-    
-         
-
     if plansza[0][0]==plansza[1][1]==znak:
          if plansza[2][1]==plansza[0][1]==plansza[0][2]==0:
               return(0,1)
@@ -183,11 +184,8 @@ def detectcrossing():
               return(1,2)
          if plansza [2][2]==plansza[0][2]==plansza[0][0]==0:
               return(0,0)
-        
-        
-         
-
     return (-1,-1)
+
 def basicmoves():
      enemy = znak
      if enemy==2:
@@ -227,6 +225,7 @@ def basicmoves():
           return (2,1)
 
      return (-1,-1)
+
 def checkforend():
     global tie
     if \
