@@ -75,6 +75,10 @@ def gra_ruch():
     changesymbol()
     return redirect(url_for('gra'))
 
+@app.route("/test_ajax")
+def test_ajax():
+     return 'Test'
+
 def changesymbol():
      global znak
      if znak==2:

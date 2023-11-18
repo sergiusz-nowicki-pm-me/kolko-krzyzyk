@@ -1,8 +1,22 @@
 <html>
-    <body>
-        <h1>Gra Kółko i krzyżyk</h1>
-        <h1>Bot : {{bot}}</h1>
-        <table style="
+
+<head>
+    <script>
+        function test_ajax() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "{{ url_for('test_ajax') }}", true);
+            xhttp.send();
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Gra Kółko i krzyżyk</h1>
+    <h1>Bot : {{bot}}</h1>
+    <table style="
         background-image: url(/static/plansza.png);
         background-size: 500px 500px;
         width: 500px;
@@ -10,32 +24,31 @@
         background-repeat: no-repeat;
         background-position: center;">
         {% for wiersz in range(0,3) %}
-            <tr>
+        <tr>
             {% for komorka in range(0,3) %}
-                {% if plansza[wiersz][komorka]==0: %}
-                    <td width="166px" height="166px">
-                        <a href="{{url_for('gra_ruch', x=wiersz,y=komorka)}}">
-                        <img src="/static/puste.png" width="160px">
-                        </a>
-                    </td>
-                {% else %}
-                {% if plansza[wiersz][komorka]==1: %}
-                    <td width="166px" height="166px"><img src="/static/kółko.png" width="160px"></td>
-                    {% else %}
-                        <td width="166px" height="166px"><img src="/static/krzyżyk.png" width="160px"></td>
-                    {%endif%}
-                {%endif%}
+            {% if plansza[wiersz][komorka]==0: %}
+            <td width="166px" height="166px">
+                <a href="{{url_for('gra_ruch', x=wiersz,y=komorka)}}">
+                    <img src="/static/puste.png" width="160px">
+                </a>
+            </td>
+            {% else %}
+            {% if plansza[wiersz][komorka]==1: %}
+            <td width="166px" height="166px"><img src="/static/kółko.png" width="160px"></td>
+            {% else %}
+            <td width="166px" height="166px"><img src="/static/krzyżyk.png" width="160px"></td>
+            {%endif%}
+            {%endif%}
             {% endfor %}
-            </tr>
+        </tr>
         {% endfor %}
-        </table>
-        <form action="{{url_for('reset')}}">
-            <input type="submit" value="Reset Planszy"/>
-        </form>
-        <h1>Crossing creation: {{test}}</h1>
-    </body>
+    </table>
+    <form action="{{url_for('reset')}}">
+        <input type="submit" value="Reset Planszy" />
+    </form>
+    <input type="submit" onclick="test_ajax()" value="Test Ajax" />
+    <h1 id="demo"></h1>
+    <h1>Crossing creation: {{test}}</h1>
+</body>
+
 </html>
-
-
-
-
