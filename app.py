@@ -44,6 +44,35 @@ def empty():
      for wiersz in range(0,3):
         for komorka in range(0,3):
             plansza[wiersz][komorka] = 0
+@app.route("/ruch")
+def ruch():
+    global znak
+    global bot
+    wiersz = int(request.args["x"])
+    komorka = int(request.args["y"])
+    plansza[wiersz][komorka] = znak
+    if checkforend():
+        return redirect(url_for('wygrana'))
+    if bot:
+        changesymbol()
+        if winningmove() !=(-1,-1):
+                 plansza[winningmove()[0]][winningmove()[1]]=znak
+                 if checkforend():
+                    return redirect(url_for('wygrana'))
+        if block() !=(-1,-1):
+                 ruch = f"{block()[0]}{block()[1]}"
+                 changesymbol()
+                 return ruch
+        if detectcrossing() !=(-1,-1):
+                 ruch = f"{detectcrossing()[0]}{detectcrossing()[1]}"
+                 changesymbol()
+                 return ruch
+        if basicmoves() !=(-1,-1):
+                 ruch = f"{basicmoves()[0]}{basicmoves()[1]}"
+                 changesymbol()
+                 return ruch 
+    changesymbol()
+    return ""
 
 @app.route("/gra/ruch")
 def gra_ruch():

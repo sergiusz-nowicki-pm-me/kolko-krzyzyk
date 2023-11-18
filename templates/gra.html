@@ -10,6 +10,14 @@
             xhttp.open("GET", "{{ url_for('test_ajax') }}", true);
             xhttp.send();
         }
+        function move(wiersz,komorka) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById(this.responseText).innerHTML = "<img src=\"/static/kółko.png\" width=\"160px\">"
+            }
+            xhttp.open("GET", "{{url_for('gra_ruch', x=wiersz,y=komorka}}");
+            xhttp.send();
+        }
     </script>
 </head>
 
@@ -27,7 +35,7 @@
         <tr>
             {% for komorka in range(0,3) %}
             {% if plansza[wiersz][komorka]==0: %}
-            <td width="166px" height="166px">
+            <td id="{{wiersz}}{{komorka}}" width="166px" height="166px">
                 <a href="{{url_for('gra_ruch', x=wiersz,y=komorka)}}">
                     <img src="/static/puste.png" width="160px">
                 </a>
