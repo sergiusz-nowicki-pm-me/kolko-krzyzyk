@@ -16,6 +16,9 @@
             td.setAttribute("onclick","")
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
+                if(this.responseText=="r"){
+                    window.location.href="{{url_for('wygrana')}}";
+                }
                 let dt = document.getElementById(this.responseText);
                 dt.innerHTML = "<img src=\"/static/kółko.png\" width=\"160px\">";
                 dt.setAttribute("onclick","");

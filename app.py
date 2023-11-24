@@ -46,67 +46,38 @@ def empty():
             plansza[wiersz][komorka] = 0
 @app.route("/ruch")
 def ruch():
+    print(plansza)
     global znak
     global bot
     wiersz = int(request.args["x"])
     komorka = int(request.args["y"])
     plansza[wiersz][komorka] = znak
     if checkforend():
-        return redirect(url_for('wygrana'))
+          return "r"
+        
     if bot:
         changesymbol()
         if winningmove() !=(-1,-1):
                  plansza[winningmove()[0]][winningmove()[1]]=znak
                  if checkforend():
-                    return redirect(url_for('wygrana'))
+                    return "r"
         if block() !=(-1,-1):
                  ruch = f"{block()[0]}{block()[1]}"
+                 plansza[block()[0]][block()[1]]=znak
                  changesymbol()
-                 print(ruch)
                  return ruch
         if detectcrossing() !=(-1,-1):
                  ruch = f"{detectcrossing()[0]}{detectcrossing()[1]}"
+                 plansza[detectcrossing()[0]][detectcrossing()[1]]=znak
                  changesymbol()
-                 print(ruch)
                  return ruch
         if basicmoves() !=(-1,-1):
                  ruch = f"{basicmoves()[0]}{basicmoves()[1]}"
+                 plansza[basicmoves()[0]][basicmoves()[1]]=znak
                  changesymbol()
-                 print(ruch)
                  return ruch 
     changesymbol()
     return ""
-
-@app.route("/gra/ruch")
-def gra_ruch():
-    global znak
-    global bot
-    wiersz = int(request.args["x"])
-    komorka = int(request.args["y"])
-    plansza[wiersz][komorka] = znak
-    if checkforend():
-        return redirect(url_for('wygrana'))
-    if bot:
-        changesymbol()
-        if winningmove() !=(-1,-1):
-                 plansza[winningmove()[0]][winningmove()[1]]=znak
-                 if checkforend():
-                    return redirect(url_for('wygrana'))
-        if block() !=(-1,-1):
-                 plansza[block()[0]][block()[1]]=znak
-                 changesymbol()
-                 return redirect(url_for('gra'))
-        if detectcrossing() !=(-1,-1):
-                 plansza[detectcrossing()[0]][detectcrossing()[1]]=znak
-                 changesymbol()
-                 return redirect(url_for('gra'))
-        if basicmoves() !=(-1,-1):
-                 plansza[basicmoves()[0]][basicmoves()[1]]=znak
-                 changesymbol()
-                 return redirect(url_for('gra'))  
-    changesymbol()
-    return redirect(url_for('gra'))
-
 @app.route("/test_ajax")
 def test_ajax():
      return 'Test'
