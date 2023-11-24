@@ -62,14 +62,17 @@ def ruch():
         if block() !=(-1,-1):
                  ruch = f"{block()[0]}{block()[1]}"
                  changesymbol()
+                 print(ruch)
                  return ruch
         if detectcrossing() !=(-1,-1):
                  ruch = f"{detectcrossing()[0]}{detectcrossing()[1]}"
                  changesymbol()
+                 print(ruch)
                  return ruch
         if basicmoves() !=(-1,-1):
                  ruch = f"{basicmoves()[0]}{basicmoves()[1]}"
                  changesymbol()
+                 print(ruch)
                  return ruch 
     changesymbol()
     return ""
@@ -239,15 +242,6 @@ def basicmoves():
           return (0,2)
 
     #sides
-     if plansza[0][0] == 0:
-          return (0,0)
-     if plansza[2][2] == 0:
-          return (2,2)
-     if plansza[0][2] == 0:
-          return (0,2)
-     if plansza[2][0] == 0:
-          return (2,0)
-     
      if plansza[0][1] == 0:
           return (0,1)
      if plansza[1][0] == 0:
